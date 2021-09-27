@@ -47,10 +47,9 @@ A_R_k_x = array(0, dim(no_label_data)[1])
   #reachability distance
 for(i in seq(along=1:dim(no_label_data)[1])){ #gets the datapoint in the neighborhood
   for(j in seq(along= 1:length(knn_radius_points[i,]))){
-    s_x_y = minkowsky(no_label_data[i,], no_label_data[knn_radius_points[i,j],], 2)
-    v_k_y = V_k_x[knn_radius_points[i,j]]
-    max_dist = max(s_x_y,v_k_y)
-    A_R_k_x[i] = A_R_k_x[i] + max_dist
+    x = minkowsky(no_label_data[i,], no_label_data[knn_radius_points[i,j],], 2)
+    y = V_k_x[knn_radius_points[i,j]]
+    A_R_k_x[i] = A_R_k_x[i] + max(x,y)
   }
   A_R_k_x[i] = A_R_k_x[i] / length(knn_radius_points[i,])
 }
