@@ -14,12 +14,12 @@ minkowsky = function(x,y,p){
 
 # p = c(1, 2, 3)
 # q = c(4, 5, 6)
-# type = 2
-# 
-# # type < 1, triangle inequality violation
-# # type = 1, Manhattan
-# # type = 2, Euclidian
-# # type -> inf, Chebyshev
-# 
+# type = 3
+# # 
+# # # type < 1, triangle inequality violation
+# # # type = 1, Manhattan
+# # # type = 2, Euclidian
+# # # type -> inf, Chebyshev
+# # 
 # minkowsy_dist = minkowsky(p,q, type)
 # minkowsy_dist

@@ -60,7 +60,7 @@ root_path = "G:/My Drive/1. EIT Digital master/Estland/Semester 1/Data mining/da
 setwd(root_path)
 
 #source("./Own functions/minkowsky-dist.R")
-load("./practice_3/Data/2gaussiandata.RData")
+load("./practice_3/Data/JGData.RData")
 
 no_label_data = x[,1:2]
 

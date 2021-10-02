@@ -5,7 +5,8 @@ canberra = function(p,q){
 }
 
 
-p = c(1, 2, 3)
-q = c(4, 5, 6)
-
-canberra_dist = canberra(p,q)
+# p = c(1, 2, 3)
+# q = c(4, 5, 6)
+# 
+# canberra_dist = canberra(p,q)
+# canberra_dist

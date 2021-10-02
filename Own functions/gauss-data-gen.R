@@ -36,7 +36,8 @@ n = 200 #samples per cluster
 mu_2D = list(c(2,0),  #mu1
              c(1,10), #mu2
              c(10,7), #mu3
-             c(11,0)) #mu4
+             c(11,0), #mu4
+             )
                       #...
                       
 
@@ -44,7 +45,7 @@ mu_2D = list(c(2,0),  #mu1
 covar = list(matrix(c(4,2,2,3),ncol=length(mu_2D[[1]])),    #sigma1
               matrix(c(2,-2,-2,6),ncol=length(mu_2D[[1]])), #sigma2
               matrix(c(4,-4,-4,5),ncol=length(mu_2D[[1]])), #sigma3
-             matrix(c(10,4,4,3),ncol=length(mu_2D[[1]])))  #sigma4
+             matrix(c(10,4,4,3),ncol=length(mu_2D[[1]]))),  #sigma4
                                                             #...
                                                             
 ### END CONFIGURATION OF GAUSSIAN

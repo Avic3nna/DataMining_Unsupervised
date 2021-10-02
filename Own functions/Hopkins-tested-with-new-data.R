@@ -4,43 +4,25 @@ rm(list = ls())
 library(mvtnorm) #multivariate normal distribution library
 set.seed(1337)
 
-source("G:/My Drive/1. EIT Digital master/Estland/Semester 1/Data mining/Lab/Own functions/gauss-data-gen-fcn.R")
 source("G:/My Drive/1. EIT Digital master/Estland/Semester 1/Data mining/Lab/Own functions/minkowsky-dist.R")
+root_path = "G:/My Drive/1. EIT Digital master/Estland/Semester 1/Data mining/data-mining-iti8730"
 
+setwd(root_path)
+
+source("./Own functions/minkowsky-dist.R")
+load("./practice_3/Data/JGdata.RData")
 ### CONFIGURATION OF GAUSSIAN
-n = 80 #samples per cluster
 
-mu_2D = list(c(20,0),  #mu1
-             c(0,30), #mu2
-             c(40,40), #mu3
-             c(50,0)) #mu4
-#...
+no_label_data = x[,1:2]
 
+no_label_data = matrix(runif(200,1,100),1500,2) #uniform data
+n = 400 #samples per cluster
 
-#needs to be positive semi-definite
-covar = list(matrix(c(4,2,2,3),ncol=length(mu_2D[[1]])),    #sigma1
-             matrix(c(2,-2,-2,6),ncol=length(mu_2D[[1]])), #sigma2
-             matrix(c(4,-4,-4,5),ncol=length(mu_2D[[1]])), #sigma3
-             matrix(c(10,4,4,3),ncol=length(mu_2D[[1]])))  #sigma4
-#...
-
-
-### END CONFIGURATION OF GAUSSIAN
-
-#generation of gaussians, returns NaN if input dimensions don't match
-generated_data = multi_gauss_data_gen(n, mu_2D, covar)
-
-#plot clusters
-# x11() #remove x11() if using MacOS
-# plot(generated_data, col=generated_data[,ncol(generated_data)], xlab = 'X1', ylab='X2', ylim=range(c(-5,20)), xlim=range(c(-5,10)))
-
-#remove labels
-no_label_data = generated_data[,-ncol(generated_data)]
-x11()
-plot(no_label_data, col = 'black', xlab = 'X1', ylab='X2', ylim=range(c(-5,20)), xlim=range(c(-5,10)))
 
 
 #find range of dataset for the uniform distrib.
+
+### NOTE IF MORE DIMENSIONS YOU NEED TO ADD d3 etc etc
 range_d1 = range(no_label_data[,1])
 range_d2 = range(no_label_data[,2])
 
@@ -94,7 +76,7 @@ hopkins_stat = function(X, sample_X, rand_unif){
       qi_X_dist = minkowsky(rand_unif[i,],X[j,],2) #eucl. distance
       nn_frame_qi[j] = qi_X_dist
     }
-
+    
     min_dist_pi_X[i] = min(na.omit(nn_frame_pi))
     min_dist_qi_X[i] = min(na.omit(nn_frame_qi))
   }
@@ -107,8 +89,8 @@ hopkins_stat = function(X, sample_X, rand_unif){
 print(hopkins_stat(no_label_data, sample_X, rand_unif))
 
 # H = 1: data highly clustered
-# H = 0.5: data random
-# H = 0: data uniform
+# H = 0.5: data uniform
+# H = 0: data random
 
 #check with native formula
 # library(clustertend)
@@ -116,5 +98,10 @@ print(hopkins_stat(no_label_data, sample_X, rand_unif))
 
 library(factoextra)
 # Compute Hopkins statistic for iris dataset
-res <- get_clust_tendency(no_label_data, n = nrow(no_label_data)-1, graph = FALSE)
+res <- get_clust_tendency(no_label_data, n = n/4, graph = FALSE)
 res$hopkins_stat
+
+
+plot(no_label_data[,1], no_label_data[,2])
+par(new=TRUE)
+plot(rand_unif[,1], rand_unif[,2])
